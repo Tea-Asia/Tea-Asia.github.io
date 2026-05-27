@@ -1,0 +1,761 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>茶道 — Чайный Путь</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--green:#C3E0CB;
+--purple:#635160;
+--bg:#F9F6F1;
+--text:#1a1a1a;
+--white:#fff;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Montserrat',sans-serif;
+background:var(--bg);
+color:var(--text);
+overflow-x:hidden;
+}
+
+h1,h2,h3,h4{
+font-family:'Playfair Display',serif;
+}
+
+img{
+width:100%;
+display:block;
+}
+
+.layout{
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+width:220px;
+background:var(--purple);
+color:white;
+position:fixed;
+left:0;
+top:0;
+bottom:0;
+padding:32px 20px;
+overflow-y:auto;
+}
+
+.logo{
+margin-bottom:40px;
+padding-bottom:20px;
+border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.logo h1{
+font-size:28px;
+color:var(--green);
+}
+
+.logo span{
+font-size:13px;
+letter-spacing:1px;
+text-transform:uppercase;
+color:rgba(255,255,255,.7);
+}
+
+.nav{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.nav-item{
+border:none;
+background:transparent;
+color:white;
+padding:14px 16px;
+border-radius:16px;
+text-align:left;
+cursor:pointer;
+font-size:15px;
+transition:.3s ease;
+}
+
+.nav-item.active,
+.nav-item:hover{
+background:var(--green);
+color:var(--purple);
+}
+
+.main{
+margin-left:220px;
+width:calc(100% - 220px);
+}
+
+.page{
+display:none;
+}
+
+.page.active{
+display:block;
+}
+
+.hero{
+min-height:88vh;
+display:flex;
+align-items:center;
+padding:70px;
+background:
+linear-gradient(rgba(249,246,241,.88), rgba(249,246,241,.9)),
+url('images/tea3.jpg') center/cover;
+}
+
+.hero-content{
+max-width:820px;
+}
+
+.hero h1{
+font-size:72px;
+color:var(--purple);
+margin-bottom:24px;
+}
+
+.hero p{
+font-size:18px;
+line-height:1.9;
+margin-bottom:28px;
+}
+
+.eyebrow{
+text-transform:uppercase;
+letter-spacing:3px;
+color:var(--purple);
+margin-bottom:14px;
+font-size:13px;
+}
+
+.hero-buttons{
+display:flex;
+gap:16px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:16px 30px;
+border:none;
+border-radius:999px;
+cursor:pointer;
+font-weight:600;
+transition:.3s ease;
+}
+
+.btn-primary{
+background:var(--purple);
+color:white;
+}
+
+.btn-secondary{
+background:white;
+color:var(--purple);
+}
+
+.btn:hover{
+transform:translateY(-3px);
+}
+
+.section{
+padding:70px;
+}
+
+.section-title{
+font-size:42px;
+margin-bottom:18px;
+color:var(--purple);
+}
+
+.section-subtitle{
+line-height:1.8;
+margin-bottom:40px;
+color:#444;
+}
+
+.feature-grid,
+.tea-grid,
+.history-grid{
+display:grid;
+gap:24px;
+}
+
+.feature-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.tea-grid{
+grid-template-columns:repeat(3,1fr);
+}
+
+.history-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.card,
+.tea-card,
+.history-card{
+background:white;
+border-radius:26px;
+padding:28px;
+box-shadow:0 10px 24px rgba(0,0,0,.05);
+}
+
+.tea-card{
+padding:0;
+overflow:hidden;
+}
+
+.tea-card img{
+height:240px;
+object-fit:cover;
+}
+
+.tea-content{
+padding:24px;
+}
+
+.tea-content h3{
+font-size:28px;
+margin-bottom:10px;
+color:var(--purple);
+}
+
+.tea-original{
+font-size:15px;
+margin-bottom:14px;
+color:#666;
+}
+
+.tea-content p{
+line-height:1.8;
+margin-bottom:16px;
+}
+
+.country-hero{
+padding:70px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+align-items:center;
+}
+
+.country-hero h1{
+font-size:64px;
+color:var(--purple);
+margin-bottom:18px;
+}
+
+.native-script{
+font-size:100px;
+color:rgba(99,81,96,.12);
+}
+
+.hero-blob{
+overflow:hidden;
+border-radius:40px;
+box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+.hero-blob img{
+height:100%;
+object-fit:cover;
+}
+
+.country-fact{
+background:white;
+padding:20px;
+border-left:4px solid var(--green);
+border-radius:18px;
+margin-top:28px;
+line-height:1.8;
+}
+
+.history-card h3{
+margin-bottom:14px;
+color:var(--purple);
+}
+
+.history-year{
+font-weight:700;
+margin-bottom:12px;
+color:var(--purple);
+}
+
+@media(max-width:1100px){
+.tea-grid{
+grid-template-columns:1fr;
+}
+
+.country-hero{
+grid-template-columns:1fr;
+}
+}
+
+@media(max-width:900px){
+.layout{
+flex-direction:column;
+}
+
+.sidebar{
+position:relative;
+width:100%;
+}
+
+.main{
+margin-left:0;
+width:100%;
+}
+
+.hero,
+.country-hero,
+.section{
+padding:40px 24px;
+}
+
+.hero h1,
+.country-hero h1{
+font-size:46px;
+}
+
+.feature-grid,
+.history-grid{
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="layout">
+
+<aside class="sidebar">
+<div class="logo">
+<h1>茶道<br>Чайный Путь</h1>
+<span>Традиции Азии</span>
+</div>
+
+<nav class="nav">
+<button class="nav-item active" data-page="home">🏠 Главная</button>
+<button class="nav-item" data-page="china">🇨🇳 Китай (中国)</button>
+<button class="nav-item" data-page="japan">🇯🇵 Япония (日本)</button>
+<button class="nav-item" data-page="korea">🇰🇷 Корея (한국)</button>
+<button class="nav-item" data-page="taiwan">🇹🇼 Тайвань (臺灣)</button>
+<button class="nav-item" data-page="india">🇮🇳 Индия (भारत)</button>
+<button class="nav-item" data-page="thailand">🇹🇭 Таиланд (ไทย)</button>
+<button class="nav-item" data-page="about">ℹ️ О проекте</button>
+</nav>
+</aside>
+
+<main class="main">
+
+<section class="page active" id="home">
+<div class="hero">
+<div class="hero-content">
+<div class="eyebrow">Чайная культура Востока</div>
+<h1>Искусство Азиатского Чая</h1>
+
+<p>
+Погрузитесь в атмосферу древних чайных традиций Азии — от китайского гунфу ча и японского тяною до корейского даре и индийского масала чая. Проект объединяет историю, происхождение, церемонии и культурное значение знаменитых сортов чая.
+</p>
+
+<div class="hero-buttons">
+<button class="btn btn-primary" onclick="showPage('china')">Начать путешествие</button>
+<button class="btn btn-secondary" onclick="showPage('about')">О проекте</button>
+</div>
+</div>
+</div>
+
+<section class="section">
+<h2 class="section-title">Мир чайных традиций</h2>
+
+<div class="feature-grid">
+
+<div class="card">
+<h3>История чая</h3>
+<p>Узнайте, как чай стал частью философии, монастырской культуры, дипломатии и повседневной жизни в разных странах Азии.</p>
+</div>
+
+<div class="card">
+<h3>Чайные церемонии</h3>
+<p>Исследуйте древние ритуалы, посвящённые уважению к гостю, внутреннему спокойствию и гармонии с природой.</p>
+</div>
+
+<div class="card">
+<h3>Происхождение сортов</h3>
+<p>Каждый чай имеет собственную историю появления, связанную с климатом, горами, монастырями и местными традициями.</p>
+</div>
+
+<div class="card">
+<h3>Культура Востока</h3>
+<p>Чай в Азии — это часть искусства, философии и общения, объединяющая поколения и народы.</p>
+</div>
+
+</div>
+</section>
+</section>
+
+<section class="page" id="about">
+<div class="hero">
+<div class="hero-content">
+<div class="eyebrow">О проекте</div>
+
+<h1>Чай как искусство и философия</h1>
+
+<p>
+Проект посвящён культуре азиатского чая и объединяет традиции Китая, Японии, Кореи, Тайваня, Индии и Таиланда. Здесь собраны сведения о происхождении сортов, развитии чайных церемоний, исторических особенностях и культурных обычаях.
+</p>
+
+<p>
+Основная цель проекта — показать, что чай в Азии является не просто напитком, а частью мировоззрения, общения, медитации и искусства.
+</p>
+
+<div class="hero-buttons">
+<button class="btn btn-primary" onclick="showPage('china')">Изучить страны</button>
+<button class="btn btn-secondary" onclick="showPage('home')">На главную</button>
+</div>
+</div>
+</div>
+</section>
+
+<div id="countries-container"></div>
+
+</main>
+</div>
+
+<script>
+
+const countries = [
+{
+id:"china",
+native:"中国",
+title:"Китай",
+fact:"Китай считается родиной чая и хранит тысячелетние традиции его выращивания.",
+image:"images/tea9.jpg",
+history:"Согласно легенде, чай был открыт императором Шэньнуном около 2737 года до н.э., когда листья чайного дерева случайно попали в горячую воду. Со временем чай стал частью медицины, философии и искусства.",
+ceremony:"Церемония гунфу ча проходит в спокойной обстановке и требует внимания к каждому движению. Используются маленькие чаши, гайвань или исинский чайник. Важны аромат, последовательность проливов и уважение к гостям.",
+teas:[
+{
+name:"Пуэр",
+original:"普洱茶",
+caffeine:"62 мг",
+img:"images/tea10.jpg",
+desc:"Выдержанный чай из провинции Юньнань. Его прессуют в блины и выдерживают годами. Пуэр ценится за землистый аромат, глубокий вкус и традицию длительного хранения. В Китае его часто подают после плотной еды и во время семейных встреч."
+},
+{
+name:"Лунцзин",
+original:"龙井茶",
+caffeine:"34 мг",
+img:"images/tea6.jpg",
+desc:"Знаменитый зелёный чай «Колодец дракона» появился в Ханчжоу. Листья обжариваются вручную в специальных котлах. Чай известен мягким ореховым вкусом и считается символом китайской чайной культуры."
+},
+{
+name:"Те Гуань Инь",
+original:"铁观音",
+caffeine:"48 мг",
+img:"images/tea3.jpg",
+desc:"Легендарный улун из провинции Фуцзянь. Название связано с богиней милосердия Гуаньинь. Чай обладает цветочным ароматом и традиционно используется во время церемоний гунфу ча."
+}
+]
+},
+
+{
+id:"japan",
+native:"日本",
+title:"Япония",
+fact:"Японская чайная церемония формировалась под влиянием дзен-буддизма.",
+image:"images/tea11.jpg",
+history:"Чай попал в Японию из Китая в IX веке благодаря буддийским монахам. Со временем японцы создали собственную эстетическую философию чая, основанную на гармонии, уважении и спокойствии.",
+ceremony:"Тяною или садо проходит в чайном домике. Гости проходят очищение перед входом, а мастер чая готовит напиток в полной тишине и сосредоточенности. Каждый предмет в церемонии имеет символическое значение.",
+teas:[
+{
+name:"Матча",
+original:"抹茶",
+caffeine:"70 мг",
+img:"images/tea10.jpg",
+desc:"Порошковый зелёный чай, выращиваемый в тени перед сбором. Матча используется в японской чайной церемонии и взбивается бамбуковым венчиком тясэн до появления густой пены."
+},
+{
+name:"Сенча",
+original:"煎茶",
+caffeine:"42 мг",
+img:"images/tea2.jpg",
+desc:"Самый распространённый чай Японии. Листья обрабатываются паром сразу после сбора, благодаря чему сохраняют яркий зелёный цвет и свежий травяной вкус."
+},
+{
+name:"Гёкуро",
+original:"玉露",
+caffeine:"55 мг",
+img:"images/tea7.jpg",
+desc:"Премиальный теневой чай с насыщенным вкусом умами. Перед сбором кусты закрывают от солнца, чтобы повысить содержание аминокислот."
+}
+]
+},
+
+{
+id:"korea",
+native:"한국",
+title:"Корея",
+fact:"Корейская чайная культура тесно связана с буддийскими храмами.",
+image:"images/tea3.jpg",
+history:"Чайная традиция Кореи активно развивалась в эпоху Силла и Корё. Буддийские монахи использовали чай для медитаций и церемоний в храмах.",
+ceremony:"Даре — корейский чайный этикет, основанный на естественности и уважении. Во время церемонии важны спокойная атмосфера, аккуратная подача и общение между участниками.",
+teas:[
+{
+name:"Борича",
+original:"보리차",
+caffeine:"5 мг",
+img:"images/tea4.jpg",
+desc:"Напиток из обжаренного ячменя, популярный в корейских семьях. Его часто подают охлаждённым летом или горячим зимой как повседневный домашний напиток."
+},
+{
+name:"Омиджа",
+original:"오미자차",
+caffeine:"12 мг",
+img:"images/tea1.jpg",
+desc:"Традиционный напиток из ягод лимонника. Название переводится как «чай пяти вкусов», поскольку напиток сочетает сладкие, кислые, горькие, острые и солёные оттенки."
+},
+{
+name:"Нокча",
+original:"녹차",
+caffeine:"30 мг",
+img:"images/tea2.jpg",
+desc:"Корейский зелёный чай с мягким вкусом и сладковатым ароматом. Его выращивают преимущественно на острове Чеджу."
+}
+]
+},
+
+{
+id:"taiwan",
+native:"臺灣",
+title:"Тайвань",
+fact:"Тайваньские улуны считаются одними из лучших высокогорных чаёв мира.",
+image:"images/tea10.jpg",
+history:"Чайная культура Тайваня развивалась под влиянием переселенцев из Китая. Высокогорные плантации дали начало уникальным сортам улунов.",
+ceremony:"На Тайване популярна церемония в стиле гунфу ча с большим вниманием к аромату и многократным проливам.",
+teas:[
+{
+name:"Высокогорный улун",
+original:"高山烏龍",
+caffeine:"48 мг",
+img:"images/tea3.jpg",
+desc:"Чай выращивается высоко в горах среди туманов и прохладного воздуха. Это придаёт настою цветочные и сливочные оттенки."
+},
+{
+name:"Дун Дин",
+original:"凍頂烏龍",
+caffeine:"52 мг",
+img:"images/tea9.jpg",
+desc:"Классический тайваньский улун с лёгкими карамельными нотами. Название связано с горой Дун Дин, где появился этот сорт."
+},
+{
+name:"Восточная красавица",
+original:"東方美人",
+caffeine:"46 мг",
+img:"images/tea6.jpg",
+desc:"Редкий чай с медовым ароматом. Особенность сорта связана с насекомыми, повреждающими листья и изменяющими вкус будущего чая."
+}
+]
+},
+
+{
+id:"india",
+native:"भारत",
+title:"Индия",
+fact:"Индия является одним из крупнейших мировых производителей чая.",
+image:"images/tea8.jpg",
+history:"Массовое выращивание чая в Индии началось в XIX веке во время британского колониального периода. Со временем чай стал важной частью индийской культуры.",
+ceremony:"Индийская традиция чаепития связана с уличными чайвала, семейными встречами и приготовлением пряного масала чая.",
+teas:[
+{
+name:"Дарджилинг",
+original:"दार्जिलिंग",
+caffeine:"45 мг",
+img:"images/tea7.jpg",
+desc:"Чай из гималайского региона Дарджилинг, известный тонким мускатным ароматом. Его называют «шампанским среди чаёв»."
+},
+{
+name:"Ассам",
+original:"অসম",
+caffeine:"68 мг",
+img:"images/tea1.jpg",
+desc:"Крепкий чёрный чай из долины Ассам. Благодаря насыщенному вкусу его часто используют в утренних чайных смесях."
+},
+{
+name:"Масала Чай",
+original:"मसाला चाय",
+caffeine:"58 мг",
+img:"images/tea8.jpg",
+desc:"Традиционный индийский напиток с молоком, чаем и специями. В состав обычно входят кардамон, имбирь, корица и гвоздика."
+}
+]
+},
+
+{
+id:"thailand",
+native:"ไทย",
+title:"Таиланд",
+fact:"Тайский чай известен ярким цветом и сладким вкусом.",
+image:"images/tea5.jpg",
+history:"Чайная культура Таиланда формировалась под влиянием китайских торговцев и местных уличных традиций.",
+ceremony:"В Таиланде чай чаще связан с уличной культурой и рынками, где напитки готовят прямо перед посетителями со льдом, молоком и специями.",
+teas:[
+{
+name:"Ча Йен",
+original:"ชาเย็น",
+caffeine:"50 мг",
+img:"images/tea1.jpg",
+desc:"Знаменитый тайский холодный чай со сгущённым молоком и льдом. Один из самых популярных напитков уличной кухни."
+},
+{
+name:"Чай с мотыльковым горошком",
+original:"อัญชัน",
+caffeine:"8 мг",
+img:"images/tea9.jpg",
+desc:"Ярко-синий травяной напиток из цветов клитории. Часто подаётся с лаймом, меняющим цвет настоя."
+},
+{
+name:"Жасминовый чай",
+original:"ชามะลิ",
+caffeine:"36 мг",
+img:"images/tea3.jpg",
+desc:"Ароматный чай с нежными цветочными нотами. Жасминовые сорта популярны как в Таиланде, так и в соседних странах Юго-Восточной Азии."
+}
+]
+}
+];
+
+const container = document.getElementById('countries-container');
+
+countries.forEach(country => {
+
+container.innerHTML += `
+<section class="page" id="${country.id}">
+
+<div class="country-hero">
+
+<div>
+<div class="native-script">${country.native}</div>
+<h1>${country.title}</h1>
+
+<p>
+${country.history}<br><br>
+${country.ceremony}
+</p>
+
+<div class="country-fact">
+<strong>Интересный факт:</strong><br>
+${country.fact}
+</div>
+</div>
+
+<div class="hero-image-wrap">
+<div class="hero-blob">
+<img src="${country.image}" alt="${country.title}">
+</div>
+</div>
+
+</div>
+
+<section class="section">
+<h2 class="section-title">Популярные сорта</h2>
+
+<div class="tea-grid">
+
+${country.teas.map(tea => `
+<div class="tea-card">
+<img src="${tea.img}" alt="${tea.name}">
+
+<div class="tea-content">
+<h3>${tea.name}</h3>
+<div class="tea-original">${tea.original}</div>
+
+<p><strong>Содержание кофеина:</strong> ${tea.caffeine}</p>
+
+<p>${tea.desc}</p>
+</div>
+</div>
+`).join('')}
+
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title">История и традиции</h2>
+
+<div class="history-grid">
+
+<div class="history-card">
+<div class="history-year">ПРОИСХОЖДЕНИЕ</div>
+<h3>История появления</h3>
+<p>${country.history}</p>
+</div>
+
+<div class="history-card">
+<div class="history-year">ЦЕРЕМОНИЯ</div>
+<h3>Чайные ритуалы</h3>
+<p>${country.ceremony}</p>
+</div>
+
+</div>
+</section>
+
+</section>
+`;
+
+});
+
+const navItems = document.querySelectorAll('.nav-item');
+const pages = document.querySelectorAll('.page');
+
+function showPage(id){
+
+pages.forEach(page => page.classList.remove('active'));
+navItems.forEach(btn => btn.classList.remove('active'));
+
+document.getElementById(id).classList.add('active');
+
+const activeBtn = document.querySelector(`[data-page="${id}"]`);
+
+if(activeBtn){
+activeBtn.classList.add('active');
+}
+
+window.scrollTo({
+top:0,
+behavior:'smooth'
+});
+}
+
+navItems.forEach(item => {
+
+item.addEventListener('click', () => {
+showPage(item.dataset.page);
+});
+
+});
+
+</script>
+
+</body>
+</html>
